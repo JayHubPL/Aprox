@@ -1,0 +1,7 @@
+*.o
+*.a
+interpolator.c
+gaus/pivot_ge_solver.c
+.vscode
+/test
+aprox
