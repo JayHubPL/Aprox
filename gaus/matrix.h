@@ -9,6 +9,8 @@ typedef struct {
     double* e;
 } matrix_t;
 
+void free_matrix(matrix_t* m);
+
 double dot_product_matrix(matrix_t* a, matrix_t* b);
 
 matrix_t* make_matrix(int rn, int cn);

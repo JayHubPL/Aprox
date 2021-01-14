@@ -4,6 +4,13 @@
 #include <string.h>
 #include <math.h>
 
+void
+free_matrix(matrix_t* m)
+{
+    free(m->e);
+    free(m);
+}
+
 double dot_product_matrix(matrix_t* a, matrix_t* b)
 {
     if (a->cn * a->rn == b->cn * b->rn && ((a->cn == b->rn && a->cn == 1) || (a->rn == b->cn && a->rn == 1)))
@@ -14,6 +21,9 @@ double dot_product_matrix(matrix_t* a, matrix_t* b)
             return NAN;
         if (c->rn == 1 && c->cn == 1)
             res = *(c->e);
+        else
+            return NAN;
+
         free_matrix(c);
         return res;
     }
@@ -41,12 +51,7 @@ make_matrix(int rn, int cn)
     return new_mat;
 }
 
-void
-free_matrix(matrix_t* m)
-{
-    free(m->e);
-    free(m);
-}
+
 
 void
 put_entry_matrix(matrix_t* m, int i, int j, double val)
