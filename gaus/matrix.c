@@ -7,11 +7,11 @@
 matrix_t*
 make_matrix(int rn, int cn)
 {
-    matrix_t* new_mat = malloc(sizeof * new_mat);
+    matrix_t* new_mat = (matrix_t*)malloc(sizeof * new_mat);
     if (new_mat == NULL)
         return NULL;
     if ((new_mat->e =
-        malloc((size_t)rn * (size_t)cn * sizeof * new_mat->e)) == NULL) {
+        (double*)malloc((size_t)rn * (size_t)cn * sizeof * new_mat->e)) == NULL) {
         free(new_mat);
         return NULL;
     }
@@ -152,7 +152,7 @@ transpose_matrix(matrix_t* s)
 {
     matrix_t* d = NULL;
     if (s != NULL)
-        d = make_matrix(s->rn, s->cn);
+        d = make_matrix(s->cn, s->rn);
     if (d != NULL) {
         int i, j;
         for (i = 0; i < s->rn; i++)

@@ -3,7 +3,6 @@
 
 #define EPSILON 1e-10
 
-// zwraca 0 jezeli OK
 int conj_grad_solver(matrix_t* eqs) {
     matrix_t* A = make_matrix(eqs->rn, eqs->cn - 1); // nightly
     for (int i = 0; i < A->rn; ++i)
@@ -16,7 +15,6 @@ int conj_grad_solver(matrix_t* eqs) {
     matrix_t* r = copy_matrix(b); // nightly
     matrix_t* p = copy_matrix(r); // nightly
     matrix_t* newr = NULL;
-    matrix_t* newp = NULL;
     matrix_t* tmp = NULL;
 
     for (;;) {
@@ -78,13 +76,10 @@ int conj_grad_solver(matrix_t* eqs) {
                 add_to_entry_matrix(tmp, i, j, get_entry_matrix(newr, i, j));
         free_matrix(p);
         p = tmp; // p_k becomes p_k+1
-        free_matrix(tmp);
 
         // r_k becomes r_k+1
-        tmp = r;
         free_matrix(r);
         r = newr;
-        free_matrix(tmp);
     }
     for (int i = 0; i < x->rn; ++i) // przepisanie x do eqs zamiast b
         *(eqs->e + (i + 1) * eqs->cn - 1) = *(x->e + i);

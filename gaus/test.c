@@ -1,5 +1,4 @@
 #include "matrix.h"
-#include "piv_ge_solver.h"
 #include "conj_grad_solver.h"
 #include <stdlib.h>
 #include <stdio.h>
