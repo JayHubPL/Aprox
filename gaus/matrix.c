@@ -13,24 +13,27 @@ free_matrix(matrix_t* m)
 
 double dot_product_matrix(matrix_t* a, matrix_t* b)
 {
-    if (a->cn * a->rn == b->cn * b->rn && ((a->cn == b->rn && a->cn == 1) || (a->rn == b->cn && a->rn == 1)))
-    {
-        double res;
-        matrix_t* c = mull_matrix(a, b);
-        if (c == NULL)
-            return NAN;
-        if (c->rn == 1 && c->cn == 1)
-            res = *(c->e);
-        else
-            return NAN;
+    if (a->cn * a->rn != b->cn * b->rn || a->rn != 1 || b->cn != 1)
+        return NAN;
 
-        free_matrix(c);
-        return res;
-    }
-    else
+    double res;
+    matrix_t* c = mull_matrix(a, b);
+    if (c == NULL)
     {
+        free_matrix(c);
         return NAN;
     }
+
+    if (c->rn == 1 && c->cn == 1)
+        res = *(c->e);
+    else
+    {
+        free_matrix(c);
+        return NAN;
+    }
+
+    free_matrix(c);
+    return res;
 
 }
 
