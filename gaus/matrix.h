@@ -4,43 +4,45 @@
 #include <stdio.h>
 
 typedef struct {
-	int rn;
+    int rn;
     int cn;
-    double *e;
+    double* e;
 } matrix_t;
 
-matrix_t * make_matrix( int rn, int cn );
+double dot_product_matrix(matrix_t* a, matrix_t* b);
 
-matrix_t * read_matrix( FILE *in );
+matrix_t* make_matrix(int rn, int cn);
 
-void write_matrix( matrix_t *, FILE *out );
+matrix_t* read_matrix(FILE* in);
 
-void put_entry_matrix( matrix_t *, int i, int j, double val );
+void write_matrix(matrix_t*, FILE* out);
 
-void add_to_entry_matrix( matrix_t *, int i, int j, double val );
+void put_entry_matrix(matrix_t*, int i, int j, double val);
 
-double get_entry_matrix( matrix_t *, int i, int j );
+void add_to_entry_matrix(matrix_t*, int i, int j, double val);
 
-matrix_t * copy_matrix( matrix_t *s );
+double get_entry_matrix(matrix_t*, int i, int j);
 
-matrix_t * transpose_matrix( matrix_t * s );
+matrix_t* copy_matrix(matrix_t* s);
 
-void xchg_rows( matrix_t *m, int i, int j );
+matrix_t* transpose_matrix(matrix_t* s);
 
-void xchg_cols( matrix_t *m, int i, int j );
+void xchg_rows(matrix_t* m, int i, int j);
 
-matrix_t * mull_matrix( matrix_t *, matrix_t * );
+void xchg_cols(matrix_t* m, int i, int j);
 
-matrix_t * ge_matrix( matrix_t * );
+matrix_t* mull_matrix(matrix_t*, matrix_t*);
 
-int bs_matrix( matrix_t * );
+matrix_t* ge_matrix(matrix_t*);
 
-matrix_t * pivot_ge_matrix( matrix_t *, int *row_per );
+int bs_matrix(matrix_t*);
 
-void pivot_ge_in_situ_matrix( matrix_t * );
+matrix_t* pivot_ge_matrix(matrix_t*, int* row_per);
 
-matrix_t * symm_pivot_ge_matrix( matrix_t *, int *per );
+void pivot_ge_in_situ_matrix(matrix_t*);
 
-int *pivot_get_inv_per( matrix_t *, int *row_per );
+matrix_t* symm_pivot_ge_matrix(matrix_t*, int* per);
+
+int* pivot_get_inv_per(matrix_t*, int* row_per);
 
 #endif
