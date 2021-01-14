@@ -37,19 +37,6 @@ double dot_product_matrix(matrix_t* a, matrix_t* b)
 
 }
 
-int check_tollerance(matrix_t* a, double eps)
-{
-    matrix_t* trans = transpose_matrix(a);
-    double result = dot_product_matrix(trans, a);
-
-    free_matrix(trans);
-
-    if (result < eps)
-        return 1;
-    else
-        return 0;
-}
-
 matrix_t*
 make_matrix(int rn, int cn)
 {
@@ -152,7 +139,7 @@ transpose_matrix(matrix_t* s)
 {
     matrix_t* d = NULL;
     if (s != NULL)
-        d = make_matrix(s->rn, s->cn);
+        d = make_matrix(s->cn, s->rn);
     if (d != NULL) {
         int i, j;
         for (i = 0; i < s->rn; i++)
@@ -256,4 +243,22 @@ bs_matrix(matrix_t* a)
     }
     else
         return 1;
+}
+
+matrix_t* mull_scalar_matrix(matrix_t* m, double scalar) {
+    matrix_t* r = copy_matrix(m);
+    if (!r)
+        return NULL;
+    for (int i = 0; i < r->cn * r->rn; ++i)
+        *(r->e + i) *= scalar;
+    return r;
+}
+
+double self_dot_matrix(matrix_t* m) {
+    if (m->rn != 1 && m->cn != 1)
+        return NAN;
+    double ans = 0;
+    for (int i = 0; i < m->rn * m->cn; ++i)
+        ans += (*(m->e + i) * *(m->e + i));
+    return ans;
 }

@@ -7,5 +7,11 @@ piv_ge_solver.o: piv_ge_solver.c piv_ge_solver.h matrix.h
 
 .PHONY: clean
 
+conj_grad_solver.o: conj_grad_solver.c conj_grad_solver.h matrix.o
+	gcc -c conj_grad_solver.c conj_grad_solver.h matrix.o
+
+test: matrix.o conj_grad_solver.o
+	gcc matrix.o conj_grad_solver.o
+
 clean:
-	-rm *.o libge.a
+	-rm *.o libge.a a.out *gch
