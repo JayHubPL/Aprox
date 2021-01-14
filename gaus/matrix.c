@@ -20,6 +20,19 @@ make_matrix (int rn, int cn)
   return new_mat;
 }
 
+int check_tollerance(matrix_t* a, double eps)
+{
+    matrix_t* trans = transpose_matrix(a);
+    double result = dot_product_matrix(trans, a);
+
+    free_matrix(trans);
+
+    if (result < eps)
+        return 1;
+    else
+        return 0;
+}
+
 void
 free_matrix (matrix_t * m)
 {
