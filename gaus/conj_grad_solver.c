@@ -4,6 +4,9 @@
 #define EPSILON 1e-10
 
 int conj_grad_solver(matrix_t* eqs) {
+    if (eqs == NULL)
+        return 1;
+
     matrix_t* A = make_matrix(eqs->rn, eqs->cn - 1); // nightly
     for (int i = 0; i < A->rn; ++i)
         for (int j = 0; j < A->cn; ++j)
