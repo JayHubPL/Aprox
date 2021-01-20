@@ -7,3 +7,6 @@ gaus/pivot_ge_solver.c
 /test
 aprox
 test.c
+*.h.gch
+myplot
+spl
