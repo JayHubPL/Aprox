@@ -5,38 +5,35 @@
 #include <string.h>
 #include <math.h>
 
-int main()
+int main(int argc, char** argv)
 {
-    matrix_t* a = make_matrix(3, 4);
-    //matrix_t* b = make_matrix(3, 1);
+    FILE* in = argc > 1 ? fopen(argv[1], "r") : stdin;
+    FILE* b = argc > 1 ? fopen(argv[2], "r") : stdin;
 
+    int size;
+    fscanf(in, "%d", &size);
+    //printf("%d", size);
+    matrix_t* a = make_matrix(size, size + 1);
 
-    put_entry_matrix(a, 0, 0, 1);
-    put_entry_matrix(a, 0, 1, 4);
-    put_entry_matrix(a, 0, 2, 3);
-    put_entry_matrix(a, 0, 3, 1);
+    double buf;
 
-    put_entry_matrix(a, 1, 0, 4);
-    put_entry_matrix(a, 1, 1, 2);
-    put_entry_matrix(a, 1, 2, 5);
-    put_entry_matrix(a, 1, 3, 2);
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            fscanf(in, " %lf", &buf);
+            put_entry_matrix(a, i, j, buf);
+        }
+        fscanf(b, " %lf", &buf);
+        put_entry_matrix(a, i, size, buf);
 
-    put_entry_matrix(a, 2, 0, 3);
-    put_entry_matrix(a, 2, 1, 5);
-    put_entry_matrix(a, 2, 2, 3);
-    put_entry_matrix(a, 2, 3, 3);
+    }
 
-
-
-    write_matrix(a, stdout);
+    //write_matrix(a, stdout);
 
     int tmp = conj_grad_solver(a);
-
-
-
     printf("\n Wynik:%d \n", tmp);
 
     write_matrix(a, stdout);
-    // write_matrix(b, stdout);
 
 }
